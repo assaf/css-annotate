@@ -1,0 +1,23 @@
+<html>
+  <head>
+    <title>Your CSS, annotated</title>
+    <style><%= styles %></style>
+  </head>
+  <body>
+    <table class="annotated">
+      <% rows.each do |row| %>
+        <tr>
+          <td class="comment">
+            <h2><%= h row[:selector] %></h2>
+            <blockquote><%= h row[:comment] %></blockquote>
+          </div></td>
+          <td class="code"><pre><%= h row[:style]%></pre></td>
+        </tr>
+      <% end %>
+    <table>
+    <div class="footer">
+      Generated from <span class="filename"><%= filename %></span> on
+      <%= Time.now.strftime("%c") %> by <a href="http://github.com/assaf/css-annotate">CSS Annotate</a>
+    </div>
+  </body>
+</html>

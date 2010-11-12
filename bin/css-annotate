@@ -1,0 +1,23 @@
+#!/usr/bin/env ruby
+$LOAD_PATH.unshift File.expand_path(File.dirname(__FILE__) + '/../lib')
+require "css/annotate"
+if filename = ARGV[0]
+  options = {}
+  if (i = ARGV.index("--syntax")) && ARGV[i+1]
+    options[:syntax] = ARGV[i + 1].to_sym
+    ARGV[i,2] = []
+  end
+  options[:all] = true if ARGV.delete("--all")
+  $stdout << CSS::Annotate.new(ARGV[0], options).to_html
+else
+  print <<-TEXT
+Usage:
+  css-annotate [options] filename
+
+Options:
+  --all            Show all styles (default, only commented styles)
+  --syntax [name]  Either sass or scss (default)
+
+  TEXT
+  exit -1
+end

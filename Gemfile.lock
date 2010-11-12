@@ -1,0 +1,28 @@
+PATH
+  remote: .
+  specs:
+    css-annotated (0.1.0)
+      haml (~> 3.0)
+
+GEM
+  remote: http://rubygems.org/
+  specs:
+    compass (0.10.6)
+      haml (>= 3.0.4)
+    daemons (1.1.0)
+    eventmachine (0.12.10)
+    haml (3.0.23)
+    rack (1.2.1)
+    thin (1.2.7)
+      daemons (>= 1.0.9)
+      eventmachine (>= 0.12.6)
+      rack (>= 1.0.0)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  compass
+  css-annotated!
+  haml (~> 3.0)
+  thin

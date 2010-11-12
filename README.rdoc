@@ -1,0 +1,10 @@
+  Usage:
+    css-annotate [options] filename
+
+  Options:
+    --all            Show all styles (default, only commented styles)
+    --syntax [name]\tEither sass or scss (default)
+
+
+http://cloud.github.com/downloads/assaf/css-annotate/Your%20CSS,%20annotated.png
+
