@@ -2,9 +2,8 @@
     css-annotate [options] filename
 
   Options:
-    --all            Show all styles (default, only commented styles)
-    --syntax [name]\tEither sass or scss (default)
+    --commented      Show only rules preceded by a comment
+    --syntax [name]  Either sass or scss (default)
 
 
-http://cloud.github.com/downloads/assaf/css-annotate/Your%20CSS,%20annotated.png
-
+http://labnotes.org/wp-content/uploads/2010/11/Your-CSS-annotated.png

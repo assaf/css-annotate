@@ -1,7 +1,7 @@
 $: << File.dirname(__FILE__) + "/lib"
 
 Gem::Specification.new do |spec|
-  spec.name           = "css-annotated"
+  spec.name           = "css-annotate"
   spec.version        = IO.read("VERSION")
   spec.author         = "Assaf Arkin"
   spec.email          = "assaf@labnotes.org"
@@ -19,5 +19,6 @@ Gem::Specification.new do |spec|
                           "--webcvs", "http://github.com/assaf/#{spec.name}"
 
   spec.required_ruby_version = '>= 1.8.7'
+  spec.add_dependency "compass", "~>0.10"
   spec.add_dependency "haml", "~>3.0"
 end

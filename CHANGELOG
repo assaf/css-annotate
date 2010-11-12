@@ -1,0 +1,10 @@
+2010-11-11 version 1.0.0
+
+Changed options so --commented shows only commented rules.
+
+Included Compass in dependencies.
+
+
+2010-11-11 version 0.1.0
+
+The first release

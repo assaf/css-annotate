@@ -7,7 +7,7 @@ if filename = ARGV[0]
     options[:syntax] = ARGV[i + 1].to_sym
     ARGV[i,2] = []
   end
-  options[:all] = true if ARGV.delete("--all")
+  options[:all] = !ARGV.delete("--commented")
   $stdout << CSS::Annotate.new(ARGV[0], options).to_html
 else
   print <<-TEXT
@@ -15,7 +15,7 @@ Usage:
   css-annotate [options] filename
 
 Options:
-  --all            Show all styles (default, only commented styles)
+  --commented      Show only rules preceded by a comment
   --syntax [name]  Either sass or scss (default)
 
   TEXT
