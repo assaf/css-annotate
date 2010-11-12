@@ -21,7 +21,6 @@ module CSS
     attr_reader :filename, :options, :rows
 
     def annotate
-      $stderr << options.inspect
       engine = Sass::Engine.new(IO.read(filename), options)
       tree = engine.to_tree
       tree.perform!(Sass::Environment.new)
