@@ -3,41 +3,64 @@ body {
   padding: 0;
   font-family: "Helvetica";
 }
+
+.toggle {
+  position: absolute;
+  right: 1em;
+  top: 0.3em;
+  font-size: 90%;
+  /* Link to show all rules */
+  [rel="show"] { display: none }
+  /* Link to show only commented rules */
+  [rel="hide"] { display: inherit }
+}
+
 /* Place on annotation table */
 table.annotated {
+  table-layout: fixed;
   width: 100%;
   margin: 0;
   padding: 0;
   border-collapse: collapse;
   border-bottom: 1px solid #ccc;
 
-  /* Apply to column that contains CSS selector/comment */
-  td.comment {
-    vertical-align: top;
-    padding: 0.3em 2em 0.6em 1em;
-
-    h2 {
-      font-size: 12pt;
-      margin: 0 0 0.1em 0;
-      color: #444;
+  tr {
+    /* Apply to any row that has selector with comment */
+    &.commented {
+      display: table-row;
     }
 
-    blockquote {
-      padding: 0;
-      margin: 0;
+    /* Apply to column that contains CSS selector/comment */
+    td.selector {
+      vertical-align: top;
+      padding: 1em 2em 1em 1em;
+
+      h2 {
+        font-size: 12pt;
+        margin: 0 0 0.1em 0;
+        color: #444;
+      }
+
+      blockquote {
+        padding: 0;
+        margin: 0;
+      }
     }
-  }
 
-  /* Apply to column that contains CSS style */
-  td.code {
-    background: #eef;
-    vertical-align: top;
-    padding: 0.3em 1em 0.6em 2em;
-    border-left: 1px solid #ccc;
-  }
+    /* Apply to column that contains CSS style */
+    td.style {
+      width: 40em;
+      background: #eef;
+      vertical-align: top;
+      padding: 1em 1em 1em 2em;
+      border-left: 1px solid #ccc;
+      overflow: hidden;
+      border-bottom: 1px dashed #ccc;
+    }
 
-  tr:hover td {
-    background: #ddf;
+    &:hover td {
+      background: #ddf;
+    }
   }
 }
 .footer {

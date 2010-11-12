@@ -1,8 +1,10 @@
 PATH
   remote: .
   specs:
-    css-annotated (0.1.0)
+    css-annotate (1.1.0)
+      compass (~> 0.10)
       haml (~> 3.0)
+      rack (~> 1.1)
 
 GEM
   remote: http://rubygems.org/
@@ -22,7 +24,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  compass
-  css-annotated!
+  compass (~> 0.10)
+  css-annotate!
   haml (~> 3.0)
+  rack (~> 1.1)
   thin

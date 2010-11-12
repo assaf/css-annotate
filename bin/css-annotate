@@ -1,14 +1,39 @@
 #!/usr/bin/env ruby
 $LOAD_PATH.unshift File.expand_path(File.dirname(__FILE__) + '/../lib')
 require "css/annotate"
+
+options = {}
+if (i = ARGV.index("--syntax")) && ARGV[i+1]
+  options[:syntax] = ARGV[i + 1].to_sym
+  ARGV[i,2] = []
+end
+options[:all] = !(ARGV.delete("--commented") || ARGV.delete("-c"))
+
+server = ARGV.delete("--server") || ARGV.delete("-s")
+if (i = ARGV.index("--port") || ARGV.index("-p")) && ARGV[i+1]
+  port = ARGV[i + 1].to_i
+  ARGV[i,2] = []
+end
+
 if filename = ARGV[0]
-  options = {}
-  if (i = ARGV.index("--syntax")) && ARGV[i+1]
-    options[:syntax] = ARGV[i + 1].to_sym
-    ARGV[i,2] = []
+  if server
+    require "rack"
+    app = lambda do |env|
+      request = Rack::Request.new(env)
+      if request.path == "/"
+        html = CSS::Annotate.new(filename, options).to_html
+        [200, { "Content-Type"=>"text/html", "Content-Length"=>html.length.to_s }, [html]]
+      else
+        [404, {}, "Not found"]
+      end
+    end
+    trap(:INT) { exit! }
+    trap(:QUIT) { exit! }
+    server = Rack::Handler.default
+    server.run app, :Host=>"127.0.0.1", :Port=>port || 8080
+  else
+    $stdout << CSS::Annotate.new(filename, options).to_html
   end
-  options[:all] = !(ARGV.delete("--commented") || ARGV.delete("-c"))
-  $stdout << CSS::Annotate.new(ARGV[0], options).to_html
 else
   print <<-TEXT
 Usage:
@@ -16,7 +41,13 @@ Usage:
 
 Options:
   -c --commented   Show only rules preceded by a comment
+  -p --port [num]  Port number (default 8080)
+  -s --server      Run a Web server
   --syntax [name]  Either sass or scss (default)
+
+Example:
+  css-annotate lib/css/annotate/style.scss | bcat
+  css-annotate --server lib/css/annotate/style.scss
 
   TEXT
   exit -1

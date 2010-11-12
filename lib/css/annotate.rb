@@ -7,15 +7,14 @@ require "cgi"
 module CSS
   class Annotate
 
-    DEFAULT_OPTIONS = { :syntax=>:scss }
-
     def initialize(filename, options = {})
       @filename = filename
-      @options = DEFAULT_OPTIONS.merge(options)
+      @options = options.clone
       paths = @options[:load_paths] || []
       paths.push File.dirname(@filename)
       paths.concat Compass::Frameworks::ALL.map { |framework| framework.stylesheets_directory }
       @options[:load_paths] = paths
+      @options[:syntax] ||= guess_syntax(filename)
     end
 
     attr_reader :filename, :options, :rows
@@ -34,11 +33,15 @@ module CSS
 
     def to_html
       rows = annotate
-      ERB.new(IO.read(File.dirname(__FILE__) + "/annotate/template.erb")).run(binding)
+      ERB.new(IO.read(File.dirname(__FILE__) + "/annotate/template.erb")).result(binding)
     end
 
     def styles
       Sass::Engine.new(IO.read(File.dirname(__FILE__) + "/annotate/style.scss"), :syntax=>:scss).render
+    end
+    
+    def all?
+      !!options[:all]
     end
 
   protected
@@ -73,6 +76,11 @@ module CSS
         rows.concat to_rows(node) if node.has_children
       end
       rows
+    end
+
+    def guess_syntax(filename)
+      ext = File.extname(filename).sub(/^\./, "")
+      %{css sass scss}.include?(ext) ? ext.to_sym : :scss
     end
 
   end

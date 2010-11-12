@@ -1,9 +1,18 @@
+== Usage
+  
   Usage:
     css-annotate [options] filename
 
   Options:
-    --commented      Show only rules preceded by a comment
+    -c --commented   Show only rules preceded by a comment
+    -p --port [num]  Port number (default 8080)
+    -s --server      Run a Web server
     --syntax [name]  Either sass or scss (default)
 
+  Example:
+    css-annotate lib/css/annotate/style.scss | bcat
+    css-annotate --server lib/css/annotate/style.scss
+
+== Screenshot
 
 http://labnotes.org/wp-content/uploads/2010/11/Your-CSS-annotated.png

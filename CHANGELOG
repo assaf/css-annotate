@@ -1,3 +1,12 @@
+2010-11-11 version 1.2.0
+
+You can now run css-annotate as a Web server with the -s/--server option. Hit
+refresh to reload your CSS.
+
+Now attempts to guess syntax from file extension, so pointing to a SASS file
+would just work.
+
+
 2010-11-11 version 1.1.0
 
 Added shortcut option -c, same as --commented.
