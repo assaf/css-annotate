@@ -1,4 +1,11 @@
-2010-11-11 version 1.2.0
+2010-11-13 version 1.2.1
+
+Fixed default syntax for CSS files.
+
+Parsing errors now show as HTML.
+
+
+2010-11-12 version 1.2.0
 
 You can now run css-annotate as a Web server with the -s/--server option. Hit
 refresh to reload your CSS.

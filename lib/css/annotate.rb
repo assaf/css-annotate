@@ -34,6 +34,9 @@ module CSS
     def to_html
       rows = annotate
       ERB.new(IO.read(File.dirname(__FILE__) + "/annotate/template.erb")).result(binding)
+    rescue Sass::SyntaxError=>error
+      error = Sass::SyntaxError.exception_to_css error, @options.merge(:full_exception=>true)
+      ERB.new(IO.read(File.dirname(__FILE__) + "/annotate/template.erb")).result(binding)
     end
 
     def styles
@@ -79,8 +82,7 @@ module CSS
     end
 
     def guess_syntax(filename)
-      ext = File.extname(filename).sub(/^\./, "")
-      %{css sass scss}.include?(ext) ? ext.to_sym : :scss
+      { ".css"=>:scss, ".sass"=>:sass, ".scss"=>:scss }[File.extname(filename)] || :scss
     end
 
   end

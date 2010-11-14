@@ -3,6 +3,10 @@ body {
   padding: 0;
   font-family: "Helvetica";
 }
+/* Sass errors rendered in body:before */
+body:before {
+  color: red;
+}
 
 .toggle {
   position: absolute;

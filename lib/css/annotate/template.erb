@@ -1,7 +1,7 @@
 <html>
   <head>
     <title>Your CSS, annotated</title>
-    <style><%= styles %></style>
+    <style><%= styles %><%= error %></style>
     <% if all? %>
       <script type="text/javascript">
         function toggle(show) {
@@ -21,23 +21,25 @@
     <% end %>
   </head>
   <body>
-    <% if all? %>
-      <div class="toggle">
-        <a href="javascript:toggle(false)" rel="hide">Only commented</a>
-        <a href="javascript:toggle(true)" rel="show">Show all</a>
-      </div>
-    <% end %>
-    <table class="annotated">
-      <% rows.each do |row| %>
-        <tr class="<%= "commented" if row[:comment] %>">
-          <td class="selector">
-            <h2><%= h row[:selector] %></h2>
-            <% if row[:comment] %><blockquote><%= h row[:comment] %></blockquote><% end %>
-          </td>
-          <td class="style"><pre><%= h row[:style]%></pre></td>
-        </tr>
+    <% if rows %>
+      <% if all? %>
+        <div class="toggle">
+          <a href="javascript:toggle(false)" rel="hide">Only commented</a>
+          <a href="javascript:toggle(true)" rel="show">Show all</a>
+        </div>
       <% end %>
-    </table>
+      <table class="annotated">
+        <% rows.each do |row| %>
+          <tr class="<%= "commented" if row[:comment] %>">
+            <td class="selector">
+              <h2><%= h row[:selector] %></h2>
+              <% if row[:comment] %><blockquote><%= h row[:comment] %></blockquote><% end %>
+            </td>
+            <td class="style"><pre><%= h row[:style]%></pre></td>
+          </tr>
+        <% end %>
+      </table>
+    <% end %>
     <div class="footer">
       Generated from <span class="filename"><%= filename %></span> on
       <%= Time.now.strftime("%c") %> by <a href="http://github.com/assaf/css-annotate">CSS Annotate</a>
