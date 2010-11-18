@@ -68,7 +68,7 @@ module CSS
             comment = prev.value.gsub(/(^\/\*\s*|\s*\*\/$)/, "")
           end
           if comment || options[:all]
-            selector = (node.resolved_rules || node.parsed_rules).to_a.to_s
+            selector = (node.resolved_rules || node.parsed_rules).to_a.join
             style = "#{selector} {\n"
             style << node.children.select { |child| Sass::Tree::PropNode === child }.
               map { |prop| "  #{prop.resolved_name}: #{prop.resolved_value};" }.join("\n")

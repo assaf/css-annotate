@@ -1,3 +1,10 @@
+2010-11-18 version 1.3.0
+
+By default only show commented styles (the ones that matter).
+
+Fixed rendering bug under Ruby 1.9.2.
+
+
 2010-11-13 version 1.2.1
 
 Fixed default syntax for CSS files.
