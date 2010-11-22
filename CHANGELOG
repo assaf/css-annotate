@@ -1,4 +1,8 @@
-2010-11-21 version 1.4.0
+2010-11-21 version 2.0.0
+
+Rack support! Mount css-annotate in your Web app to serve annotated
+CSS/SCSS/SASS along the originals. See README for examples.
+
 
 If no commented styles, show all styles by default.
 

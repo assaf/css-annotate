@@ -2,15 +2,12 @@ PATH
   remote: .
   specs:
     css-annotate (1.3.0)
-      compass (~> 0.10)
       haml (~> 3.0)
       rack (~> 1.1)
 
 GEM
   remote: http://rubygems.org/
   specs:
-    compass (0.10.6)
-      haml (>= 3.0.4)
     daemons (1.1.0)
     eventmachine (0.12.10)
     haml (3.0.23)
@@ -24,7 +21,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  compass (~> 0.10)
   css-annotate!
   haml (~> 3.0)
   rack (~> 1.1)

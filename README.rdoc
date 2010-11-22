@@ -9,9 +9,34 @@
     -s --server      Run a Web server
     --syntax [name]  Either sass or scss (default)
 
-  Example:
+  CSS annotate single file and pipe to browser:
     css-annotate lib/css/annotate/style.scss | bcat
-    css-annotate --server lib/css/annotate/style.scss
+
+  Run as server on port 8080, annotate files in public/stylesheets:
+    css-annotate --server public/stylesheets
+    open http://localhost:8080/main.css
+
+
+== Mount To Your App
+
+You can mount css-annotate in your Web app (Rails 3.x, Padrino, etc) to serve
+annotated versions of all CSS, SCSS and SASS files. For example, to mount all
+files from public/stylesheets under the path /stylesheets/annotated:
+
+  mount CSS::Annotate.new=>"/stylesheets/annotated"
+
+With yout browser, you can now access the CSS file /stylesheets/screen.css and
+its annotated version from /stylesheets/annotated/screen.css.
+
+To mount files from a different path, pass it as the sole argument to
+CSS::Annotate. For example:
+
+  mount CSS::Annotate.new("app/views/stylesheets")=>"/stylesheets/annotated"
+
+With your browser, you can now access the annotated SCSS file
+/stylesheets/annotated/screen.scss.  Note that both filename and extension must
+match the file you want annotated.
+
 
 == Screenshot
 

@@ -18,21 +18,12 @@ end
 if filename = ARGV[0]
   if server
     require "rack"
-    app = lambda do |env|
-      request = Rack::Request.new(env)
-      if request.path == "/"
-        html = CSS::Annotate.new(filename, options).to_html
-        [200, { "Content-Type"=>"text/html", "Content-Length"=>html.length.to_s }, [html]]
-      else
-        [404, {}, "Not found"]
-      end
-    end
     trap(:INT) { exit! }
     trap(:QUIT) { exit! }
     server = Rack::Handler.default
-    server.run app, :Host=>"127.0.0.1", :Port=>port || 8080
+    server.run CSS::Annotate.new(filename), :Host=>"127.0.0.1", :Port=>port || 8080
   else
-    $stdout << CSS::Annotate.new(filename, options).to_html
+    $stdout << CSS::Annotate.new(options).to_html(filename)
   end
 else
   print <<-TEXT
@@ -45,9 +36,19 @@ Options:
   -s --server      Run a Web server
   --syntax [name]  Either sass or scss (default)
 
-Example:
-  css-annotate lib/css/annotate/style.scss | bcat
-  css-annotate --server lib/css/annotate/style.scss
+CSS annotate single file and pipe to browser:
+  $ css-annotate lib/css/annotate/style.scss | bcat
+
+Run as server on port 8080, annotate files in public/stylesheets:
+  $ css-annotate --server public/stylesheets
+  $ open http://localhost:8080/main.css
+
+Mount to your Web app, annotate all files in app/view/stylesheets, access them
+from /stylesheets/annotated:
+  Application.routes.draw do
+    mount CSS::Annotate.new("app/views/stylesheets")=>"/stylesheets/annotated"
+  end
+  $ open http://localhost:3000/stylesheets/annotated/screen.scss
 
   TEXT
   exit -1
