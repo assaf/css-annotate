@@ -30,6 +30,15 @@ h3, h4, h5, h6 {
   right: 1em;
   top: 0.3em;
   font-size: 90%;
+  a {
+    color: #261a3b;
+    text-decoration: none;
+    font-weight: bold;
+    background: #fff;
+    padding: 2px 6px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+  }
   /* Link to show all rules */
   [rel="show"] { display: none }
   /* Link to show only commented rules */
@@ -71,7 +80,7 @@ table.annotated {
     /* Apply to column that contains CSS style */
     td.style {
       width: 40em;
-      background: #eef;
+      background: #f5f5ff;
       vertical-align: top;
       padding: 1em 1em 1em 2em;
       border-left: 1px solid #ccc;
@@ -80,7 +89,7 @@ table.annotated {
     }
 
     &:hover td {
-      background: #ddf;
+      background: #f5f5ff;
     }
   }
 }

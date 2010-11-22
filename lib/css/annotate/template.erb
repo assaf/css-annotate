@@ -2,24 +2,6 @@
   <head>
     <title>Your CSS, annotated</title>
     <style><%= styles %><%= error %></style>
-    <% if all? %>
-      <script type="text/javascript">
-        function toggle(show) {
-          var styles = document.styleSheets[0];
-          var rules = styles.cssRules || styles.rules;
-          for (var i in rules) {
-            var rule = rules[i];
-            if (rule.selectorText == "table.annotated tr")
-              rule.style.display = show ? "table-row" : "none";
-            if (rule.selectorText == ".toggle [rel=\"show\"]")
-              rule.style.display = show ? "none" : "inherit";
-            if (rule.selectorText == ".toggle [rel=\"hide\"]")
-              rule.style.display = show ? "inherit" : "none";
-          }
-        }
-        toggle(false);
-      </script>
-    <% end %>
   </head>
   <body>
     <% if rows %>
@@ -45,5 +27,24 @@
       Generated from <span class="filename"><%= filename %></span> on
       <%= Time.now.strftime("%c") %> by <a href="http://github.com/assaf/css-annotate">CSS Annotate</a>
     </div>
+    <% if all? %>
+      <script type="text/javascript">
+        function toggle(show) {
+          var styles = document.styleSheets[0];
+          var rules = styles.cssRules || styles.rules;
+          for (var i in rules) {
+            var rule = rules[i];
+            if (rule.selectorText == "table.annotated tr")
+              rule.style.display = show ? "table-row" : "none";
+            if (rule.selectorText == ".toggle [rel=\"show\"]")
+              rule.style.display = show ? "none" : "inherit";
+            if (rule.selectorText == ".toggle [rel=\"hide\"]")
+              rule.style.display = show ? "inherit" : "none";
+          }
+        }
+        var commented = document.getElementsByClassName("commented");
+        toggle(commented.length == 0);
+      </script>
+    <% end %>
   </body>
 </html>

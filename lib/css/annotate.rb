@@ -1,6 +1,5 @@
 require "haml"
 require "sass/engine"
-require "compass"
 require "erb"
 require "cgi"
 
@@ -12,7 +11,7 @@ module CSS
       @options = options.clone
       paths = @options[:load_paths] || []
       paths.push File.dirname(@filename)
-      paths.concat Compass::Frameworks::ALL.map { |framework| framework.stylesheets_directory }
+      paths.concat Compass::Frameworks::ALL.map { |framework| framework.stylesheets_directory } if defined?(Compass)
       @options[:load_paths] = paths
       @options[:syntax] ||= guess_syntax(filename)
     end

@@ -19,7 +19,6 @@ Gem::Specification.new do |spec|
                           "--webcvs", "http://github.com/assaf/#{spec.name}"
 
   spec.required_ruby_version = '>= 1.8.7'
-  spec.add_dependency "compass", "~>0.10"
   spec.add_dependency "haml", "~>3.0"
   spec.add_dependency "rack", "~>1.1"
 end
